@@ -1,0 +1,92 @@
+import java.util.Arrays;
+
+public class lodash {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Start");
+		lodash a = new lodash();
+		int[] arr = {1,2,3,4,5};
+		int[][] b = a.chunkV2(arr, 2);
+		System.out.println(Arrays.deepToString(b));
+	}
+	
+	public int[][] chunk(int[] arr, int n) {
+		
+//		int j=1; 
+//		while(j <= n) {
+//			for (int i= 0; i < arr.length; i++) {
+//				newArr[i] = arr [i]; 
+//				j++; 
+//			}
+//		}
+		//caculate number of group
+		int groupCount = arr.length / n;
+		if(groupCount*n < arr.length) {
+			groupCount++; 
+		}
+		
+				
+		int i = 0; //i la index cua thang chua duoc tuyen
+		
+		int[][] result = new int[groupCount][n]; 
+		 
+		//loop from group 1 to groupCount
+		for(int j= 0; j < groupCount; j++) {
+			
+			//can tuyen thang n thang 
+			int[] newArr = new int[n];
+			
+			//biet chac chan rang tui chi tuyen toi da n thang, nen tui cho vong lap chay n lan
+			for (int k = 0; k < n; k++) {
+				newArr[i%n] = arr[i]; //tuyen quan, vi i chinh la index cua thang chua duoc tuyen, toi access no bo vo newArr
+				i++; //i da duoc tuyen xong, thi index do khong con dung nua, tui phai tang i len
+				if (i >= arr.length) {
+					result[j] = newArr;
+					break;
+				}
+				result[j] = newArr;
+			}
+
+
+			
+		}
+		return result;
+	}
+	
+	public int[][] chunkV2(int[] arr, int n) {
+		//caculate number of group
+		int groupCount = arr.length / n;
+		if(groupCount*n < arr.length) {
+			groupCount++; 
+		}
+		
+		
+		int[][] result = new int[groupCount][n]; 
+		
+		int i = 0;
+		
+		while (i < arr.length) {
+			System.out.println("i is: "+i);
+			int[] newArr = new int[n];
+			
+			if ((arr.length - i) < n) {
+				//tuyen thieu nguoi
+				System.arraycopy(arr, i, newArr, 0, arr.length - i);
+				result[i/n] = newArr;
+				break;
+			}
+			
+			System.arraycopy(arr, i, newArr, 0, n);
+			result[i/n] = newArr;
+			i += n;
+		}
+		
+		return result;
+		
+	}
+
+}
+
+
+
