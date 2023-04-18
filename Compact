@@ -1,0 +1,85 @@
+import java.util.Arrays;
+
+public class lodash {
+
+	public static void main(String[] args) {
+		int[] a = {1,2,-3,6,0,7,-8,-9,-10}; 	
+		lodash nhi = new lodash(); 
+		 
+//		System.out.println(Arrays.toString(nhi.Compact(a)));
+		System.out.println(Arrays.toString(nhi.CompactV3(a)));
+	}
+	
+	//count first then made new array
+	public int[] Compact(int[] arr) {
+		System.out.println("Remove all negative number in the array ");
+		int count = 0;    //số thằng đạt yêu cầu
+		for(int i =0; i <arr.length; i++) {
+			if(arr[i] >= 0) {
+				count++; 
+			}
+			
+		}
+		
+		int[] newArr = new int[count];
+		int currentIndex =0; 
+		for(int k = 0; k< arr.length; k++) {
+			if(arr[k] >= 0) {
+				newArr[currentIndex] = arr[k];
+				currentIndex++; 
+			}
+			
+		}
+		return newArr; 
+	}
+	
+	//ko count
+	
+	public int[] CompactV2(int[] arr) {
+		int[] newArr = new int[arr.length];
+		int count = 0; // số thằng đc thêm vào newArr
+		int currentIndex =0; 
+		//đi từng thằng coi thằng nào đạt yêu cầu thì thêm vô newArr
+		for(int k = 0; k < arr.length; k++) {
+			if(arr[k] >= 0) {
+				newArr[currentIndex] = arr[k]; 
+				currentIndex++; 
+				count++; 
+			}
+			
+		}
+		int[] resultArr = new int[count]; 
+		System.arraycopy(newArr, 0, resultArr, 0, count);
+		return resultArr;
+		
+	}
+	
+	
+	//xài append
+	
+	public int[] append(int[] arr, int elem) {
+		int[] newArr = new int[arr.length + 1];
+		System.arraycopy(newArr, 0, newArr, 0, arr.length);
+		newArr[arr.length] = elem;
+		return newArr;
+				
+	}
+	
+	public int[] CompactV3(int[] arr) {
+		
+		int[] newArr = new int[0] ;
+		
+		//thêm phần tử đầu tiên vô newArr
+		for(int k = 0; k< arr.length; k++) {
+			if (arr[k] > 0) {
+				newArr = this.append(arr, arr[k]);
+			}
+			
+		}
+		return newArr;
+	}
+			
+	
+
+}
+
