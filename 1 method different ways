@@ -1,0 +1,35 @@
+// AddOperation interface
+public interface AddOperation {
+    int perform(int x, int y);
+}
+
+// SimpleAddOperation implementation
+public class SimpleAddOperation implements AddOperation {
+    @Override
+    public int perform(int x, int y) {
+        return x + y;
+    }
+}
+
+// MultiplyAddOperation implementation
+public class MultiplyAddOperation implements AddOperation {
+    @Override
+    public int perform(int x, int y) {
+        return x * y;
+    }
+}
+
+// Calculator class
+public class Calculator {
+    public int add(int x, int y, AddOperation operation) {
+        return operation.perform(x, y);
+    }
+}
+
+//With this implementation, you can use the Calculator class with different AddOperation implementations without modifying the original class:
+
+Calculator calculator = new Calculator();
+int sum = calculator.add(10, 5, new SimpleAddOperation());
+int product = calculator.add(10, 5, new MultiplyAddOperation());
+System.out.println("Sum: " + sum); // prints Sum: 15
+System.out.println("Product: " + product); // prints Product: 50
