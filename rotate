@@ -1,0 +1,109 @@
+//move 1 cái trước
+	public int[] rotate(int[] arr) {
+		int size = arr.length;   //size or array
+		int[] newArr = new int[size];
+		newArr[size-1] = arr[0]; 
+		
+		//copy array này qua array kia 
+		System.arraycopy(arr, 1, newArr, 0, size-1);
+		return newArr; 
+		
+	}
+	public int[] rotateV2(int[] arr, int n) {
+		int size = arr.length;   //size or array
+		int[] newArr = new int[size];
+		
+		//ở new array, mình copy đầu thành cuối, cuối thành đầu từ array cũ. 
+		System.arraycopy(arr, 0, newArr, size - n, n);
+		System.arraycopy(arr, n-1, newArr, 0, size-n);
+		return newArr; 
+	}
+	
+	//in place, rotate 1 lần
+	public int[] rotateV3(int[] arr) {
+		int current = arr[0]; 
+		for(int i =1; i< arr.length; i++) {
+			arr[i-1] = arr[i]; 
+		}
+		arr[arr.length -1] = current; 
+		return arr; 
+	}
+  private int[] partialReverse(int[] arr, int from , int to) {
+		while(from < to) {
+			int current = arr[from]; 
+			arr[from] = arr[to]; 
+			arr[to] = current;
+			from++;
+			to--; 
+		}
+		return arr; 
+	}
+	
+	private int[] swap(int[] arr) {
+		int i=0; 
+		int j= arr.length-1; 
+		while(i<j) {
+			int current = arr[i];
+			arr[i] = arr[j];
+			arr[j] = current; 
+			i++; 
+			j--; 
+		}
+		return arr; 
+	}
+
+	public int[] rotateV5(int[] arr, int n) {
+		partialReverse(arr,0, n-1);                          //????? tại sao ko dùng object để call
+		partialReverse(arr,n, arr.length-1);
+		swap(arr);
+		return arr; 
+	}
+	
+	public int[] rotateV4(int[] arr, int n) {
+		if(n == arr.length || n%arr.length==0) {
+			return arr; 
+		}
+	
+		if(n < arr.length) {
+			//reverse 1st half
+			int i=0; 
+			int j=n-1; 
+			while(i<j) {
+				int current = arr[i]; 
+				arr[i] = arr[j]; 
+				arr[j] = current; 
+				i++; 
+				j--; 
+			}
+			//reverse 2nd half
+			int k = n; 
+			int t = arr.length-1; 
+			while(k<t) {
+				int current = arr[k]; 
+				arr[k] = arr[t]; 
+				arr[t] = current; 
+				k++; 
+				t--; 
+			}
+
+			//reverse cuối và đầu
+			//?? có phải sau khi kết thúc while thì i và t đã có giá trị khác nên new array bây giờ ko đc dùng i và t nữa
+			int a =0; 
+			int b = arr.length-1; 
+			while(a<b) {
+				int current = arr[a]; 
+				arr[a] = arr[b]; 
+				arr[b] = current; 
+				a++; 
+				b--; 
+			}
+			return arr; 
+		}
+		if(n> arr.length) {
+			int module = n%arr.length; 
+			rotateV4(arr, module);                        //? nếu mà chỗ này thêm this thì nghĩa là object của cái main class gọi hả
+			return arr; 
+		}
+		return arr;
+	}
+	
