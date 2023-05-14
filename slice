@@ -1,0 +1,39 @@
+/**
+	 * 
+	 * @param arr
+	 * @param a start index
+	 * @param b number of elements being removed
+	 * @param addedArr added elements               //số String added phải bằng b
+	 * @return
+	 * @throws Exception 
+	 */
+	public String[] splice(String[] arr, int a, int b, String[] str) throws Exception  {
+		if(a > arr.length-1 || b > arr.length - a) {
+			throw new Exception("Exception message");
+			
+		}
+		//if number of elements being removed > number of elements left in the array (count from start index to the end)
+		//muốn remove nhiều element hơn số element cho phép
+		//if(b > arr.length - a) {
+		//	throw new Exception("Exception message");
+		//}
+		//nếu b==0, ko remove thì insert
+		if(b==0) {
+			String[] newArr = new String[arr.length+str.length]; 
+			System.arraycopy(arr, 0, newArr, 0, a);
+			System.arraycopy(str, 0, newArr, a, str.length);
+			System.arraycopy(arr, a, newArr, a+str.length, arr.length-a);
+			return newArr; 
+		}else if(b != 0){      //nếu b!=0 thì str sẽ có size bằng b. làm replace
+			int i=0;   //index của str
+			int j=a; 	//index của arr
+			while(i<=b-1 && j<a+b) {
+				arr[j] = str[i]; 
+				i++; 
+				j++; 
+			}
+			return arr; 
+		}
+		return str;
+			
+	}
