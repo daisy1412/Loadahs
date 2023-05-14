@@ -1,0 +1,51 @@
+//1 cái java class khác riêng ra
+class MyCondition implements Condition{
+
+	@Override
+	public boolean filter(int a) {
+		return a>0;
+	}
+}
+
+public interface Condition {
+		boolean filter(int a); 
+}
+
+
+
+                                   ***********************************************
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		int[] a = {1,2,3,4,5,6};
+    int[] b = {-1,2,-3,4,5,0}; 
+		Condition condition = (elem) -> elem % 2 == 0;
+    int[] even = l.filter(a, condition);
+    
+    MyCondition nhiCondition = new MyCondition(); 
+		lodash nhi = new lodash();
+		
+		System.out.println(Arrays.toString(nhi.filter(b, nhiCondition)));
+		
+    }
+ }
+
+
+                                **********************************************************
+
+
+public int[] filter(int[] arr, Condition condition) {    //điều kiện khác nhau phụ thuộc vào object hay phụ thuộc vào body của method
+		int[] filterArr = new int[arr.length]; 
+		int index = 0; 
+		for(int i=0; i< arr.length; i++) {
+			if(condition.filter(arr[i])) {
+				filterArr[index] = arr[i];
+				index++; 
+			}
+		}
+		int[] result = new int[index]; 
+		System.arraycopy(filterArr, 0, result, 0, index);
+		return result; 
+	}
