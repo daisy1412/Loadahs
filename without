@@ -41,7 +41,9 @@ public char[] without(char[] arr, char[] exclude) {
 		
 		for(int j = 0; j < arr.length; j++) {
 			char item = arr[j];
-			
+
+
+			//check từng phần tử của arr vs tất cả phần tử của excludefor
 			if(!contains(exclude, item)) {
 				newArr[i] = item;
 				i++;
