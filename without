@@ -1,0 +1,53 @@
+//return new array
+
+//Cach cua minh. so sánh exclude vs arr gốc
+public char[] without(char[] arr, char[] exclude) {
+		char[] newArr = new char[arr.length]; 
+		int new_arr_index = 0; 
+		int arr_index =0; 
+		int element_index =0; 
+		char[] tempArr = arr;
+			for(int i=0; i < exclude.length; i++) {
+				
+				for(int k=0; k <tempArr.length; k++) {
+					if(arr[k] != exclude[element_index]) {
+						newArr[new_arr_index] = arr[k];		
+						                  
+				}
+					tempArr = newArr;
+			}
+			 		
+		}
+			return tempArr;
+		
+	}
+  
+  //cách anh hai. so sánh arr gốc với arr exclude
+  public boolean contains(char[] exclude, char element) {
+		
+		for(int i = 0; i < exclude.length; i++) {
+			if(exclude[i] == element) {
+				return true;
+			}
+		}
+		return false;
+	}
+		
+		
+	public char[] remove1(char[] arr, char[] exclude) {
+	
+		char[] newArr = new char[arr.length]; 
+		int i = 0;
+		
+		for(int j = 0; j < arr.length; j++) {
+			char item = arr[j];
+			
+			if(!contains(exclude, item)) {
+				newArr[i] = item;
+				i++;
+			}
+		}
+		return newArr;
+		
+	}
+	
