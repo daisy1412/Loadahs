@@ -1,0 +1,71 @@
+#include "Tap code.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int *dropLeft(int *array, int size, int n){
+    if(n <0 || n >= size){
+        printf("not a valid n\n");
+        return NULL;
+    }
+    int *newArr = malloc((size-n)*sizeof(int));
+    if(newArr == NULL){
+        return NULL;
+    }
+        
+     int i;
+     int j=0;
+    for(i=n; i<size; i++){
+        newArr[j] = array[i];
+        j++;
+    }
+    return newArr;
+}
+
+int *dropRight(int *array, int size, int n){
+    if(n<0 || n>= size){
+        printf("not a valid n");
+    }
+    int *newArr = malloc((size-n)*sizeof(int));
+    if(newArr == NULL){
+        return NULL;
+    }
+    int j=0;
+    for(int i =0; i< size -n; i++){
+        newArr[j] = array[i];
+        j++;
+    }
+    return newArr;
+}
+
+
+
+int main(){
+    int array[] = {1, 2, 3, 4, 5};
+    int size = sizeof(array)/sizeof(array[0]);
+    int n =2;
+    int *newArr = dropLeft(array, size, n);
+    int *newArr2 = dropRight(array, size, n);
+    
+    //Print New array
+    printf("{");
+    for(int i=0; i < size-n-1; i++){
+        
+        printf("%d", newArr[i]);
+        printf(",");
+    }
+    printf("%d", newArr[size-n-1]);
+    printf("}\n");
+    free(newArr);
+    
+    //Print newArray 2
+    printf("{");
+    for(int i =0; i < size -n-1; i++){
+        printf("%d",newArr2[i]);
+        printf(",");
+    }
+    printf("%d", newArr2[size-n-1]);
+    printf("}\n");
+    free(newArr2);
+    return 0;
+}
